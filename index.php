@@ -1,22 +1,28 @@
 <?php
-	$ToMail = $_GET['ToMail'];
+	// $ToMail = $_GET['ToMail'];
 
-	if ($ToMail == null) {
-		$ToMail = 'guest';
-	}
+	// if ($ToMail == null) {
+	// 	$ToMail = 'guest';
+	// }
 	
-	$MailSubject= $_GET['MailSubject'];
+	// $MailSubject= $_GET['MailSubject'];
 	
-	if ($MailSubject == null) {
-		$MailSubject = 'Default';
-	}
+	// if ($MailSubject == null) {
+	// 	$MailSubject = 'Default';
+	// }
 
-	$MailContent= $_GET['MailContent'];
+	// $MailContent= $_GET['MailContent'];
 	
-	if ($MailContent == null) {
-		$MailContent = 'Default';
-	}
-
+	// if ($MailContent == null) {
+	// 	$MailContent = 'Default';
+	// }
+	$jsonReqUrl  = "php://input";
+	$reqjson = file_get_contents($jsonReqUrl);
+	$reqjsonDecode = json_decode($reqjson, true);
+ 	$ToMail = 	$reqjsonDecode['ToMail'];
+ 	$MailSubject = 	$reqjsonDecode['MailSub'];
+	$MailContent = 	$reqjsonDecode['MailBody'];
+	
 	require 'includes/PHPMailer.php';
 	require 'includes/SMTP.php';
 	require 'includes/Exception.php';
